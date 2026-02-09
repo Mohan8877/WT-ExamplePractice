@@ -1,0 +1,195 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Registration Form</title>
+    <style>
+        body{
+            background-color:#fde6e2;
+        }
+        h1{
+            text-align:center;
+        }
+        table{
+            margin:auto;
+        }
+        td{
+            padding:8px;
+        }
+        input,select,textarea{
+            padding:5px;
+        }
+    </style>
+</head>
+<body>
+<h1>Student Registration Form</h1>
+<form onsubmit=validate() method="POST">
+<table>
+<tr>
+    <td><label for="roll">Roll no :</label></td>
+    <td><input type="text" id="roll" name="rollno" size="40"></td>
+</tr>
+<tr>
+    <td>Student name :</td>
+    <td>
+        <input type="text" name="fname" placeholder="First Name">
+        -
+        <input type="text" name="lname" placeholder="Last Name">
+    </td>
+</tr>
+<tr>
+    <td><label for="father">Father's name :</label></td>
+    <td><input type="text" id="father" name="fathername" size="40"></td>
+</tr>
+<tr>
+    <td>Date of birth :</td>
+    <td>
+        <input type="text" size="5" placeholder="Day"> -
+        <input type="text" size="5" placeholder="Month"> -
+        <input type="text" size="10" placeholder="Year">
+        (DD-MM-YYYY)
+    </td>
+</tr>
+<tr>
+    <td>Mobile no :</td>
+    <td>
+        <input type="text" value="+91" size="2" readonly> -
+        <input type="text" name="mobile" size="30">
+    </td>
+</tr>
+<tr>
+    <td><label for="email">Email id :</label></td>
+    <td><input type="email" id="email" name="email" size="40"></td>
+</tr>
+<tr>
+    <td><label for="pass">Password :</label></td>
+    <td><input type="password" id="pass" name="password" size="40"></td>
+</tr>
+<tr>
+    <td>Gender :</td>
+    <td>
+        <input type="radio" name="gender"> Male
+        <input type="radio" name="gender"> Female
+    </td>
+</tr>
+<tr>
+    <td>Department :</td>
+    <td>
+        <input type="checkbox" name="CSE"> CSE
+        <input type="checkbox" name="IT"> IT
+        <input type="checkbox" name="ECE"> ECE
+        <input type="checkbox" name="Civil"> Civil
+        <input type="checkbox" name="Mech"> Mech
+    </td>
+</tr>
+<tr>
+    <td>Course :</td>
+    <td>
+        <select>
+            <option  >----------------Select Current Course's----------------</option>
+            <option value="B.Tech" name="B.Tech">B.Tech</option>
+            <option value="M.Tech" name="M.Tech">M.Tech</option>
+            <option value="B.Sc" name="B.Sc">B.Sc</option>
+            <option value="MCA" name="MCA">MCA</option>
+        </select>
+    </td>
+</tr>
+<tr>
+    <td>Student photo :</td>
+    <td><input type="file"></td>
+</tr>
+<tr>
+    <td><label for="city">City :</label></td>
+    <td><input type="text" id="city" name="city" size="40"></td>
+</tr>
+<tr>
+    <td>Address :</td>
+    <td><textarea rows="4" cols="38">hi</textarea></td>
+</tr>
+<tr>
+    <td colspan="2" align="center">
+        <input type="submit" value="Register">
+    </td>
+</tr>
+</table>
+</form>
+</body>
+<script>
+
+function validate(){
+    let roll=document.getElementById("roll").value.trim();
+    let fname=document.getElementsByName("fname")[0].value.trim();
+    let lname=document.getElementsByName("lname")[0].value.trim();
+    let father=document.getElementById("father").value.trim();
+    let dobDay=document.getElementsByTagName("input")[3].value.trim();
+    let dobMonth=document.getElementsByTagName("input")[4].value.trim();
+    let dobYear=document.getElementsByTagName("input")[5].value.trim();
+    let mobile=document.getElementsByName("mobile")[0].value.trim();
+    let email=document.getElementById("email").value.trim();
+    let password=document.getElementById("pass").value.trim();
+    let gender=document.getElementsByName("gender");
+    let dept=document.querySelectorAll("input[type='checkbox']:checked");
+    let course=document.querySelector("select").value;
+    let city=document.getElementById("city").value.trim();
+    let address=document.getElementsByTagName("textarea")[0].value.trim();
+    let emailRegex=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    let mobileRegex=/^[0-9]{10}$/;  
+    if(roll==""){
+        alert("Enter roll number");
+        return false;
+    }
+    if(fname==""||lname==""){
+        alert("Enter full student name");
+        return false;
+    }
+    if(father==""){
+        alert("Enter father's name");
+        return false;
+    }
+    if(dobDay==""||dobMonth==""||dobYear==""){
+        alert("Enter complete date of birth");
+        return false;
+    }
+    if(!mobileRegex.test(mobile)){
+        alert("Enter valid 10-digit mobile number");
+        return false;
+    }
+    if(!emailRegex.test(email)){
+        alert("Enter a valid email");
+        return false;
+    }
+    if(password.length<6){
+        alert("Password must be at least 6 characters");
+        return false;
+    }
+    let genderSelected=false;
+    for(let g of gender){
+        if(g.checked){
+            genderSelected=true;
+        }
+    }
+    if(!genderSelected){
+        alert("Select gender");
+        return false;
+    }
+    if(dept.length==0){
+        alert("Select at least one department");
+        return false;
+    }
+    if(course.includes("Select")){
+        alert("Select a course");
+        return false;
+    }
+    if(city==""){
+        alert("Enter city");
+        return false;
+    }
+    if(address==""){
+        alert("Enter address");
+        return false;
+    }
+    alert("Registration Successful!");
+    return true;
+}
+</script>
+</html>

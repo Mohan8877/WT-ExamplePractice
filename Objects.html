@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+   <iframe src="Form.html" style="height:600px; width:100%; border:1px solid black;">
+</iframe>
+
+<script>
+//Object.create() method
+let Person_greet={
+    greet(){
+        console.log("Hello! Good Morning.");
+    }
+};
+let user=Object.create(Person_greet);
+user.name="MOHAN"
+user.greet(); 
+console.log(user.name);
+
+</script>
+
+<script>
+//Modern way class(ES6)
+class Employee{
+    constructor(name,salary){
+        this.name=name;
+        this.salary=salary;
+    }
+    
+}
+let emp1=new Employee("Kumar",50000);
+console.log(emp1);
+</script>
+</body>
+</html>
